@@ -1,0 +1,45 @@
+---
+import './home.scss';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+		<style>
+			body {
+				background-color: black;
+				color: white;
+				justify-content: space-around;
+				padding: 6vh 0 0 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="starcontainer" aria-hidden="true">
+			<div class="stars small"></div>
+			<div class="stars small2"></div>
+			<div class="stars medium"></div>
+			<div class="stars medium2"></div>
+			<div class="stars large"></div>
+			<div class="stars large2"></div>
+		</div>
+		<div id="skyline"></div>
+		<header>
+			<img
+				id="logo"
+				alt="Wilson Biggs logo"
+				src="images/logo-colored.svg"
+			/>
+			<slot />
+		</header>
+		<nav>
+			<ul role="menubar">
+				<li><a role="menuitem" href="about.html">about me</a></li>
+			</ul>
+		</nav>
+	</body>
+</html>
