@@ -33,7 +33,6 @@ body {
 }
 
 .header {
-	height: 5rem;
 	background-color: #111111cc;
 
 	nav {
@@ -48,6 +47,16 @@ body {
 			align-items: center;
 			gap: 2rem;
 			font-size: 1.2rem;
+
+			@media screen and (max-width: 500px) {
+				flex-wrap: wrap;
+				justify-content: center;
+
+				.logo-item {
+					flex-basis: 100%;
+					text-align: center;
+				}
+			}
 
 			li {
 				margin: 0;

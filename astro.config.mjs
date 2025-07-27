@@ -11,5 +11,8 @@ export default defineConfig({
 			SITE: envField.string({ context: "server", access: "public" })
 		}
 	},
-	site: SITE
+	site: SITE,
+	image: {
+		responsiveStyles: true
+	}
 });
