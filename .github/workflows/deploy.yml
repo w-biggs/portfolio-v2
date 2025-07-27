@@ -52,4 +52,4 @@ jobs:
                   echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
                   ssh-keyscan -H 167.99.57.215 >> ~/.ssh/known_hosts
-                  rsync -avz --no-t --delete ./dist/ github@167.99.57.215:/srv/wilsonbiggs.com/
+                  rsync -avz --no-t --no-perms --delete ./dist/ github@167.99.57.215:/srv/wilsonbiggs.com/
