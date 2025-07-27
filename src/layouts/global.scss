@@ -84,6 +84,7 @@ main {
 	padding: 1rem;
 	border: 1px dashed var(--content-text-color);
 	background: rgba(0, 0, 0, 0.8);
+	position: relative;
 
 	h1:first-child {
 		margin-top: 0;

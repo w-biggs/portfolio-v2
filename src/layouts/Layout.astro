@@ -54,3 +54,13 @@ const hash = childProcess
 		</footer>
 	</body>
 </html>
+
+<script>
+	const rescaleImages = document.querySelectorAll<HTMLImageElement>('.rescale-img');
+
+	for (const image of rescaleImages) {
+		const imageSize = image.getBoundingClientRect();
+		image.style.width = `${imageSize.width / window.devicePixelRatio}px`;
+		image.style.height = `${imageSize.height / window.devicePixelRatio}px`;
+	}
+</script>
