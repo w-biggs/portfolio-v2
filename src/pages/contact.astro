@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+<Layout>
+	<h1>Contact</h1>
+	<p>Some ways to get in touch with me:</p>
+	<ul>
+		<li><a id="email-link" rel="nofollow, noindex" href="to-email-w/">email</a></li>
+		<li><a href="https://github.com/w-biggs/">github</a></li>
+	</ul>
+</Layout>
+
+<script is:inline defer>
+	const email = document.getElementById('email-link');
+	email.setAttribute('href', email.getAttribute('href')
+		.replace('-', 's')
+		.replaceAll('-', '@')
+		.replace('/', 'ilsonbiggs.com')
+		.replace('to', 'mailto:wil')
+		.replace('email', 'on')
+	);
+</script>
+

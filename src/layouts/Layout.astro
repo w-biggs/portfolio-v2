@@ -1,6 +1,13 @@
 ---
 import './global.scss';
 import Stars from "../components/Stars/Stars.astro";
+import childProcess from "child_process";
+
+// obtain Git commit hash
+const hash = childProcess
+	.execSync("git rev-parse --short HEAD")
+	.toString()
+	.trim()
 ---
 
 <html lang="en">
@@ -31,7 +38,7 @@ import Stars from "../components/Stars/Stars.astro";
 						<a href="/articles">articles</a>
 					</li>
 					<li>
-						<a href="/">contact</a>
+						<a href="/contact">contact</a>
 					</li>
 					<li>
 						<a href="https://cigazze.com/">music</a>
@@ -42,5 +49,8 @@ import Stars from "../components/Stars/Stars.astro";
 		<main>
 			<slot />
 		</main>
+		<footer>
+			version <a href={`https://github.com/w-biggs/portfolio-v2/tree/${hash}`} title="GitHub link to current version of website">{ hash }</a>
+		</footer>
 	</body>
 </html>
