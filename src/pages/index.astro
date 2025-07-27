@@ -1,7 +1,26 @@
 ---
 
-import HomeLayout from "../layouts/HomeLayout.astro";---
+import './index.scss';
+import HomeLayout from "../layouts/Layout.astro";
+import { Image } from 'astro:assets';
+import robinJpg from '../images/robin.jpg';
+---
 
 <HomeLayout>
-	<h1>w biggs</h1>
+	<section class="about-me" aria-label="about me">
+		<Image
+			src={robinJpg}
+			alt="A robin, photographed from the back, perched on a rock."
+			width="300"
+			height="300"
+			layout="constrained"
+		/>
+		<div class="text-content">
+			<h1>w. biggs</h1>
+			<p>hi!</p>
+			<p>i'm a computer nerd, bird nerd, weather nerd, music nerd, and musician (though not as much as i'd like) based in pittsburgh, pa, usa.</p>
+			<p>i currently work full-time as a software engineer, primarily working with web tech.</p>
+		</div>
+	</section>
+	<nav></nav>
 </HomeLayout>

@@ -1,0 +1,102 @@
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<script>
+	const canvas = document.getElementById('stars') as HTMLCanvasElement | null;
+
+	interface StarGroup {
+		radius: number;
+		animationLength: number;
+		animationDelay: number;
+		count: number;
+		stars: Star[];
+	}
+
+	interface Star {
+		x: number;
+		y: number;
+	}
+
+	const generateStar = (): Star => {
+		return {
+			x: Math.random(),
+			y: Math.random()
+		};
+	};
+
+	const generateStarsList = (canvas: HTMLCanvasElement): StarGroup[] => {
+		// 1,400,000 pixels is roughly what the original implementation of this was tested on when deciding how many stars to use
+		let starFactor = ((canvas.width * canvas.height) / 1400000);
+
+		const starGroups: StarGroup[] = [
+			{ radius: 1, animationLength: 5000, animationDelay: Math.round(Math.random() * 5000), count: starFactor * 100, stars: [] },
+			{ radius: 1, animationLength: 5000, animationDelay: Math.round(Math.random() * 5000), count: starFactor * 100, stars: [] },
+			{ radius: 2, animationLength: 7500, animationDelay: Math.round(Math.random() * 75000), count: starFactor * 50, stars: [] },
+			{ radius: 2, animationLength: 7500, animationDelay: Math.round(Math.random() * 75000), count: starFactor * 50, stars: [] },
+			{ radius: 3, animationLength: 10000, animationDelay: Math.round(Math.random() * 10000), count: starFactor * 25, stars: [] },
+			{ radius: 3, animationLength: 10000, animationDelay: Math.round(Math.random() * 10000), count: starFactor * 25, stars: [] }
+		];
+
+		for (const starGroup of starGroups) {
+			for (let i = 0; i < starGroup.count; i++) {
+				starGroup.stars.push(generateStar());
+			}
+		}
+
+		return starGroups;
+	}
+
+	const starColor = (starGroup: StarGroup, time: Date) => {
+		const animationProgress = ((time.getTime() - starGroup.animationDelay) % starGroup.animationLength) / starGroup.animationLength;
+		let brightness = 0;
+		if (animationProgress <= 0.7) {
+			// Linear from 255 to 76.5
+			brightness = Math.round(255 - (animationProgress / 0.7) * (255 - 76.5));
+		} else {
+			// Linear from 76.5 back to 255
+			brightness = Math.round(76.5 + ((animationProgress - 0.7) / 0.3) * (255 - 76.5));
+		}
+		return `rgb(${brightness}, ${brightness}, ${brightness})`;
+	};
+
+	let imageData: ImageData;
+
+	const updateCanvasHeight = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
+		canvas.width = window.innerWidth * window.devicePixelRatio;
+		canvas.height = window.innerHeight * window.devicePixelRatio;
+
+		imageData = ctx.createImageData(canvas.width, canvas.height);
+	};
+
+	let canvasResizeTimeout: number;
+
+	if (canvas && canvas.getContext) {
+		const ctx = canvas.getContext('2d', { alpha: false });
+
+		if (ctx) {
+			window.addEventListener('resize', () => {
+				clearTimeout(canvasResizeTimeout);
+
+				canvasResizeTimeout = window.setTimeout(() => { updateCanvasHeight(canvas, ctx) }, 100);
+			});
+
+			updateCanvasHeight(canvas, ctx);
+
+			const starGroups = generateStarsList(canvas);
+
+			const drawStars = () => {
+				const time = new Date();
+
+				for (const starGroup of starGroups) {
+					ctx.fillStyle = starColor(starGroup, time);
+					for (const star of starGroup.stars) {
+						ctx.fillRect(star.x * canvas.width, star.y * canvas.height, starGroup.radius, starGroup.radius);
+					}
+				}
+
+				window.requestAnimationFrame(drawStars);
+			}
+
+			window.requestAnimationFrame(drawStars);
+		}
+	}
+</script>
