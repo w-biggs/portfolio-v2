@@ -21,6 +21,8 @@ jobs:
               run: npm ci
 
             - name: Build Astro
+              env:
+                  SITE: https://wilsonbiggs.com
               run: npm run build
 
             - name: Upload build output
