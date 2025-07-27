@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Article from "../components/Article/Article.astro";
+
+const articles = await getCollection('articles');
+---
+<Layout>
+	<h1>
+		Articles
+		<a href="/rss.xml">
+			<img alt="RSS icon" src="/images/rss.svg" style="height: 1rem; width: 1rem;" />
+		</a>
+	</h1>
+	{ articles.length ?
+		<ul>
+			{ articles.map((article) => {
+				const isoPublishDate = new Date(article.data.pubDate).toISOString().split('T')[0];
+				return (
+					<li>{isoPublishDate} - <a href={`/articles/${article.id}`}>{article.data.title}</a></li>
+				)
+			}) }
+		</ul>
+		: <p>No articles yet!</p>
+	}
+</Layout>
+
+<style>
+	ul {
+		margin-bottom: 0.5rem;
+	}
+</style>
+

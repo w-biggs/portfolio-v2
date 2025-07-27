@@ -1,6 +1,6 @@
 ---
 import './global.scss';
-import Stars from "../components/Stars.astro";
+import Stars from "../components/Stars/Stars.astro";
 ---
 
 <html lang="en">
@@ -16,19 +16,19 @@ import Stars from "../components/Stars.astro";
 	</head>
 	<body>
 		<Stars class="stars-container"></Stars>
-		<header>
+		<header class="header">
 			<nav aria-label="Main navigation">
 				<ul>
 					<li>
 						<a href="/" id="logo">
 							<img
 								alt="W Biggs logo"
-								src="images/logo-colored.svg"
+								src="/images/logo-colored.svg"
 							/>
 						</a>
 					</li>
 					<li>
-						<a href="/">articles</a>
+						<a href="/articles">articles</a>
 					</li>
 					<li>
 						<a href="/">contact</a>

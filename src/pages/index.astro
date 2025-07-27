@@ -1,12 +1,10 @@
 ---
-
-import './index.scss';
-import HomeLayout from "../layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro";
 import { Image } from 'astro:assets';
 import robinJpg from '../images/robin.jpg';
 ---
 
-<HomeLayout>
+<Layout>
 	<section class="about-me" aria-label="about me">
 		<Image
 			src={robinJpg}
@@ -23,4 +21,18 @@ import robinJpg from '../images/robin.jpg';
 		</div>
 	</section>
 	<nav></nav>
-</HomeLayout>
+</Layout>
+
+<style>
+	.about-me {
+		display: flex;
+		gap: 1.5rem;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+
+		.text-content {
+			flex: 1 1 300px;
+		}
+	}
+</style>

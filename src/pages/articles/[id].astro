@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Article from "../../components/Article/Article.astro";
+import Layout from "../../layouts/Layout.astro";
+// 1. Generate a new path for every collection entry
+export async function getStaticPaths() {
+	const articles = await getCollection('articles');
+	return articles.map((article: CollectionEntry<'articles'>) => ({
+		params: { id: article.id },
+		props: { article },
+	}));
+}
+// 2. For your template, you can get the entry directly from the prop
+const { article } = Astro.props;
+---
+<Layout>
+	<Article article={article} />
+</Layout>
+

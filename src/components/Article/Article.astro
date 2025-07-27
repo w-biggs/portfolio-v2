@@ -1,0 +1,30 @@
+---
+import './Article.scss';
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+
+const dateOptions: object = {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+};
+
+const formattedPublishDate = new Date(article.data.pubDate).toLocaleDateString("en-US", dateOptions);
+const isoPublishDate = new Date(article.data.pubDate).toISOString().split('T')[0];
+const { Content } = await render(article);
+---
+
+<article>
+	<header>
+		<h1>{article.data.title}</h1>
+		<p class="description">{article.data.description}</p>
+		<p class="pubdate">Published on <time datetime={isoPublishDate}>{formattedPublishDate}</time></p>
+	</header>
+	<Content />
+</article>
