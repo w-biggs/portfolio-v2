@@ -4,9 +4,9 @@ import Layout from "../layouts/Layout.astro";
 
 const articles = await getCollection('articles');
 ---
-<Layout title="Articles">
+<Layout title="articles">
 	<h1>
-		Articles
+		articles
 		<a href="/rss.xml">
 			<img alt="RSS icon" src="/images/rss.svg" style="height: 1rem; width: 1rem;" />
 		</a>
@@ -20,7 +20,7 @@ const articles = await getCollection('articles');
 				)
 			}) }
 		</ul>
-		: <p>No articles yet!</p>
+		: <p>no articles yet!</p>
 	}
 	<img class="rescale-img" aria-hidden="true" src="/images/birds.gif" alt="gif of two seagulls flying" style="position: absolute; top: 1em; right: 1em; image-rendering: pixelated;">
 </Layout>
